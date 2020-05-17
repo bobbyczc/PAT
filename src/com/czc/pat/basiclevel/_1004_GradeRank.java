@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.Scanner;
 
 /**
- * https://pintia.cn/problem-sets/994805260223102976/problems/994805321640296448
+ * @see <a href="https://pintia.cn/problem-sets/994805260223102976/problems/994805321640296448">成绩排名</a>
  * 1004 成绩排名 (20分)
  * 读入 n（>0）名学生的姓名、学号、成绩，分别输出成绩最高和成绩最低学生的姓名和学号。
  *

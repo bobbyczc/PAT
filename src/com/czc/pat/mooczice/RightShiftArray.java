@@ -10,54 +10,57 @@ import java.util.Scanner;
 public class RightShiftArray {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int lenth = scanner.nextInt();
+        int length = scanner.nextInt();
         int offset = scanner.nextInt();
-        int[] initArray = new int[lenth];
-        for(int i = 0; i <lenth; i++){
+        int[] initArray = new int[length];
+        for(int i = 0; i <length; i++){
             initArray[i] = scanner.nextInt();
         }
-        rightShiftArray(initArray, offset);
+        rightShiftArray(initArray, offset % length);
         System.out.print(initArray[0]);
-        for (int i = 1; i < lenth; i++){
+        for (int i = 1; i < length; i++){
             System.out.print(" " + initArray[i]);
         }
     }
 
-    private static void rightShiftOne(int[] array){
-        int temp = array[0], swap = 0;
-        for(int i = 0; i < array.length -1; i++){
-            swap = array[i+1];
-            array[i+1] = temp;
-            temp = swap;
-        }
-        array[0] = temp;
-    }
-
-    private static void rightShiftArray(int[] array, int offset){
-        for(int i = 0; i < offset; i++){
-            rightShiftOne(array);
-        }
-    }
+//    private static void rightShiftOne(int[] array){
+//        int temp = array[0], swap;
+//        for(int i = 0; i < array.length -1; i++){
+//            swap = array[i+1];
+//            array[i+1] = temp;
+//            temp = swap;
+//        }
+//        array[0] = temp;
+//    }
+//
 //    private static void rightShiftArray(int[] array, int offset){
-//        int span = array.length / offset;
 //        for(int i = 0; i < offset; i++){
-//            int temp = array[i],swap = 0;
-//            for(int j = 0; j < span; j++){
-//                int index = j * offset + i;
-//                if(index < array.length - offset){
-//                    swap = array[index + offset];
-//                    array[index + offset] = temp;
-//                    temp = swap;
-//                }else{
-//                    if(index==array.length){
-//                        break;
-//                    }else{
-//                        array[(index + offset) % array.length] = temp;
-//                    }
-//                }
-//            }
+//            rightShiftOne(array);
 //        }
 //    }
+    private static void rightShiftArray(int[] array, int offset){
+        if(offset != 0){
+            int span = array.length / offset;
+            for(int i = 0; i < offset; i++){
+                int temp = array[i],swap = 0;
+                for(int j = 0; j < span; j++){
+                    int index = j * offset + i;
+                    if(index < array.length - offset){
+                        swap = array[index + offset];
+                        array[index + offset] = temp;
+                        temp = swap;
+                    }else{
+                        if(index==array.length){
+                            break;
+                        }else{
+                            array[(index + offset) % array.length] = temp;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
 
 }
 
