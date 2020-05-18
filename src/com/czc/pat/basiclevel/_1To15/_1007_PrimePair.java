@@ -1,4 +1,4 @@
-package com.czc.pat.basiclevel;
+package com.czc.pat.basiclevel._1To15;
 
 import java.util.ArrayList;
 import java.util.Scanner;

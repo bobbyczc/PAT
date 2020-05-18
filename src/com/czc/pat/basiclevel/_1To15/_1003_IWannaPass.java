@@ -1,5 +1,8 @@
-package com.czc.pat.basiclevel;
+package com.czc.pat.basiclevel._1To15;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -25,40 +28,40 @@ public class _1003_IWannaPass {
         Scanner scanner = new Scanner(System.in);
         int quantity = Integer.parseInt(scanner.nextLine());
         String[] strToCheck = new String[quantity];
-        String[] abc = new String[3];
         for(int i = 0; i < quantity; i++){
             strToCheck[i] = scanner.nextLine();
         }
         for(String check: strToCheck){
-            match(check, abc);
+            System.out.println(match(check) ? "YES" : "NO");
         }
     }
 
-    private static void match(String s, String[] abc){
-        if (!s.matches("^[PAT]+")){
-            System.out.println("NO");
-            return;
-        }
-        if(s.contains("PAT")){
-            String[] twoSide = s.split("PAT");
-            for(String x: twoSide){
-                if(!x.matches("^[A]*")){
-                    System.out.println("NO");
-                    return;
+    private static boolean match(String s){
+        int pCount = 0, tCount = 0, aCount = 0, bCount = 0, cCount = 0;
+        for(char c:s.toCharArray()){
+            if(c=='A'){
+                if(pCount == 0){
+                    aCount ++;
+                }else if(tCount == 0){
+                    bCount ++;
+                }else{
+                    cCount ++;
                 }
+            }else if(c == 'P'){
+                pCount ++;
+                if(tCount > 0 || pCount ==2){
+                    return false;
+                }
+            }else if(c == 'T'){
+                tCount ++;
+                if(tCount == 2){
+                    return false;
+                }
+            }else{
+                return false;
             }
-            abc[0] = twoSide.length > 0 ? twoSide[0] : "";
-            abc[1] = "A";
-            abc[2] = twoSide.length > 1 ? twoSide[1] : "";
-            System.out.println("YES");
-            return;
         }
-        if((abc[0] + "P" + abc[1] + "AT" + abc[2] + abc[0]).equals(s)){
-            System.out.println("YES");
-            abc[1] = abc[1] + "A";
-            abc[2] = abc[0] + abc[2];
-        }else{
-            System.out.println("NO");
-        }
+        if(bCount == 0 || pCount == 0 || tCount == 0) return false;
+        return aCount * bCount == cCount;
     }
 }
