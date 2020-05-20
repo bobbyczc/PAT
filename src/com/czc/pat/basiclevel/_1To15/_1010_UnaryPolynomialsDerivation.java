@@ -24,32 +24,23 @@ import java.util.Scanner;
  */
 public class _1010_UnaryPolynomialsDerivation {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int[] init = toIntArray(scanner.nextLine().split(" "));
-        System.out.println(calculateDerivation(init));
-
-    }
-
-    private static String calculateDerivation(int[] init){
-        StringBuilder sb = new StringBuilder();
-        if(init[0] == 0){
-            return "0 0";
-        }
-        for(int i = 0; i < init.length-1; i += 2){
-            init[i] = init[i] * init[i+1];
-            init[i+1] = init[i+1] - 1;
-            if(init[i+1] != -1){
-                sb.append(init[i]).append(" ").append(init[i+1]).append(" ");
+        Scanner sc = new Scanner(System.in);
+        int flag = 0;
+        while(sc.hasNext()) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            if(b!=0) {
+                if(flag==0) {
+                    flag=1;//第一次不输出空格
+                }else {
+                    System.out.print(" ");//以后后面还有ab的话就输出空格
+                }
+                System.out.print(a * b+" "+ (b-1));
             }
         }
-        return sb.deleteCharAt(sb.lastIndexOf(" ")).toString();
+        if(flag==0)
+            System.out.print("0 0");
+
     }
 
-    private static int[] toIntArray(String[] strings){
-        int[] result = new int[strings.length];
-        for(int i = 0; i < strings.length; i++){
-            result[i] = Integer.parseInt(strings[i]);
-        }
-        return result;
-    }
 }

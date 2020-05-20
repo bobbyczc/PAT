@@ -1,5 +1,6 @@
 package com.czc.pat.basiclevel._1To15;
 
+import java.util.Calendar;
 import java.util.Scanner;
 
 /**
@@ -9,7 +10,6 @@ import java.util.Scanner;
 public class _1014_HaveADate {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String[] strArr = new String[4];
         System.out.print(getWeekAndHour(scanner.nextLine(), scanner.nextLine()) +
                 getMinute(scanner.nextLine(), scanner.nextLine()));
 
@@ -19,19 +19,24 @@ public class _1014_HaveADate {
         String week = "", hour = "";
         int length = Math.min(str1.length(), str1.length());
         for(int i = 0, count = 0; i < length; i++){
-            if(isWeek(str1.charAt(i)) && str1.charAt(i) == str2.charAt(i)){
-                if (count == 0){
-                    week = getWeek(str1.charAt(i));
-                    count ++;
-                    continue;
+            if(str1.charAt(i) == str2.charAt(i)){
+                char same = str1.charAt(i);
+                if(count == 0){
+                    if(isWeek(same)){
+                        week = getWeek(same);
+                        count ++;
+                    }
+                }else if(count == 1){
+                    if(isHour(same)){
+                        if(Character.isDigit(same)){
+                            hour = "0" + same;
+                        }else{
+                            hour = String.valueOf(same - 'A' + 10);
+                        }
+                        break;
+                    }
                 }
             }
-            if(count == 1 && isHour(str1.charAt(i)) && str1.charAt(i) == str2.charAt(i)){
-                hour = Character.isDigit(str1.charAt(i)) ? String.valueOf(str1.charAt(i)) : String.valueOf(str1.charAt(i) - 'A' + 10);
-                count ++;
-            }
-
-            if(count >= 2) break;
         }
         return week + " " + hour + ":";
     }

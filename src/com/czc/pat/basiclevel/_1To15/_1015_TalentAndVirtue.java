@@ -9,7 +9,7 @@ import java.util.*;
  * 1015 德才论 (25分)
  *
  */
-public class TalentAndVirtue {
+public class _1015_TalentAndVirtue {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String[] info = scanner.nextLine().split(" ");
@@ -42,7 +42,6 @@ public class TalentAndVirtue {
 
             }
         }
-        lists.
         Arrays.sort(lists.toArray(), 0, index2, new Comparator<Object>() {
             @Override
             public int compare(Object s1, Object s2) {
